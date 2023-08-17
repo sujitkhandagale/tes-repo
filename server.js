@@ -6,7 +6,10 @@ const SSLKEY = fs.readFileSync("./ssl/privatekey.pem", "utf8");
 const CERTIFICATE = fs.readFileSync("./ssl/certificate.pem", "utf8");
 const SSLCREDENTIALS = { key: SSLKEY, cert: CERTIFICATE };
 const httpsServerOnly = https.createServer(SSLCREDENTIALS, app);
-app.post("/", (req, res) => {
+app.post("/check-ssl", (req, res) => {
+  res.send("SSL Status" + " " + req.connection.encrypted);
+});
+app.get("/", (req, res) => {
   res.send("SSL Status" + " " + req.connection.encrypted);
 });
 
